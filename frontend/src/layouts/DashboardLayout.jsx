@@ -1,5 +1,6 @@
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
+import StatsGrid from "../components/dashboard/StatsGrid";
 
 export default function DashboardLayout() {
   return (
@@ -9,10 +10,8 @@ export default function DashboardLayout() {
       <div className="flex flex-1 flex-col">
         <Navbar />
 
-        <main className="flex-1 p-8">
-          <div className="rounded-3xl border border-dashed border-slate-300 p-10 text-center dark:border-slate-700">
-            Dashboard Content Coming Soon
-          </div>
+        <main className="flex-1 bg-slate-100 p-8 dark:bg-slate-950">
+          <StatsGrid />
         </main>
       </div>
     </div>

@@ -1,40 +1,57 @@
-import {
-  LayoutDashboard,
-  Users,
-  GraduationCap,
-  FileText,
-  Settings,
-} from "lucide-react";
-
-const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard" },
-  { icon: Users, label: "Faculty" },
-  { icon: GraduationCap, label: "Students" },
-  { icon: FileText, label: "Reports" },
-  { icon: Settings, label: "Settings" },
-];
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { menuItems } from "../../constants/menu";
+import { useSidebar } from "../../context/SidebarContext";
+import SidebarItem from "./SidebarItem";
+import SidebarFooter from "./SidebarFooter";
 
 export default function Sidebar() {
+  const { collapsed, toggleSidebar } = useSidebar();
+
   return (
-    <aside className="flex h-screen w-72 flex-col bg-violet-700 text-white shadow-xl">
-      <div className="border-b border-violet-600 p-6">
-        <h1 className="text-2xl font-bold">FacultyMS</h1>
-        <p className="text-sm text-violet-200">
-          Patna Women's College
-        </p>
+    <aside
+      className={`${
+        collapsed ? "w-24" : "w-72"
+      } flex h-screen flex-col bg-violet-800 text-white transition-all duration-300`}
+    >
+      {/* Logo */}
+      <div className="flex items-center justify-between border-b border-violet-700 p-5">
+        {!collapsed && (
+          <div>
+            <h1 className="text-xl font-bold">
+              FacultyMS
+            </h1>
+
+            <p className="text-xs text-violet-200">
+              Patna Women's College
+            </p>
+          </div>
+        )}
+
+        <button
+          onClick={toggleSidebar}
+          className="rounded-lg p-2 hover:bg-violet-700"
+        >
+          {collapsed ? (
+            <ChevronRight size={20} />
+          ) : (
+            <ChevronLeft size={20} />
+          )}
+        </button>
       </div>
 
-      <nav className="mt-6 flex-1 px-4">
-        {menuItems.map(({ icon: Icon, label }) => (
-          <button
-            key={label}
-            className="mb-2 flex w-full items-center gap-4 rounded-xl px-4 py-3 transition hover:bg-violet-600"
-          >
-            <Icon size={20} />
-            <span>{label}</span>
-          </button>
+      {/* Menu */}
+      <div className="flex-1 overflow-y-auto p-4">
+        {menuItems.map((item) => (
+          <SidebarItem
+            key={item.id}
+            {...item}
+            collapsed={collapsed}
+          />
         ))}
-      </nav>
+      </div>
+
+      {/* Footer */}
+      <SidebarFooter collapsed={collapsed} />
     </aside>
   );
 }
