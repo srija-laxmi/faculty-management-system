@@ -4,6 +4,7 @@ import Navbar from "../components/layout/Navbar";
 import {
   StatsGrid,
   FacultyChart,
+  AttendanceChart,
 } from "../components/dashboard";
 
 export default function DashboardLayout() {
@@ -15,12 +16,15 @@ export default function DashboardLayout() {
         <Navbar />
 
         <main className="flex-1 bg-slate-100 p-8 dark:bg-slate-950">
-          <div className="space-y-8">
-            <StatsGrid />
+  <div className="space-y-8">
+    <StatsGrid />
 
-            <FacultyChart />
-          </div>
-        </main>
+    <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
+      <FacultyChart />
+      <AttendanceChart />
+    </div>
+  </div>
+</main>
       </div>
     </div>
   );
